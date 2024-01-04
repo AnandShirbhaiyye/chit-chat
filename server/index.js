@@ -6,6 +6,13 @@ dotenv.config();
 const app = express();
 app.use(express.json());
 
+app.get('/health',(req, res)=>{
+  res.json({
+    success: true,
+    message: "running app successfully.."
+  })
+})
+
 async function connectMongoDB() {
   try {
     const conn = await mongoose.connect(process.env.MONGODB_URI);
