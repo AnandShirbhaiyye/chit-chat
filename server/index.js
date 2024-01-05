@@ -1,20 +1,11 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import postApiSignup from "./controllers/user.js"
+import {postApiSignup, postApiLogin} from "./controllers/user.js";
 dotenv.config();
 
 const app = express();
 app.use(express.json());
-
-app.get("/health", (req, res) => {
-  res.json({
-    success: true,
-    message: "running app successfully..",
-  });
-});
-
-app.post("/api/signup", postApiSignup );
 
 async function connectMongoDB() {
   try {
@@ -27,6 +18,17 @@ async function connectMongoDB() {
   }
 }
 connectMongoDB();
+
+app.get("/health", (req, res) => {
+  res.json({
+    success: true,
+    message: "running app successfully..",
+  });
+});
+
+app.post("/api/signup", postApiSignup);
+
+app.post("/api/login", postApiLogin);
 
 const PORT = process.env.PORT || 5000;
 
