@@ -1,12 +1,12 @@
-import User from "../models/User";
+import User from "./../models/User.js";
 
 const postApiSignup = async (req, res) => {
-  const { email, password, fullname } = req.body;
+  const { email, password, fullName } = req.body;
   try {
     const user = await User({
       email,
       password,
-      fullname,
+      fullName,
     });
     const savedUser = await user.save();
     res.status(201).json({
